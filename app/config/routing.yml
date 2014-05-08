@@ -1,0 +1,4 @@
+kendoctor_cms:
+    resource: "@KendoctorCmsBundle/Resources/config/routing.yml"
+    prefix:   /
+

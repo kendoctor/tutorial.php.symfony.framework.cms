@@ -75,9 +75,31 @@ OK. It's time to let us make our hands to move.
 
 ##Generate a bundle and create a page now
 
+Above, we have introduced what is a bundle. Bundle is just like a java .jar package, or just like a windows .dll, which contains classes, functions, resources etc, we can reuse them from bundle.
 
+Now, create a bundle via CLI cmd.
 
+```
+$ php app/console generate:bundle --namespace=Kendoctor/CmsBundle --format=yml
+```
 
+This cmd takes two options here
+
+* namespace - {VendorName}/{BundleName}Bundle
+* format - tells bundle generator to use yaml format configuration
+
+If you are not familiar with yaml, take it easy, I will discuss in the process.
+
+Issue this cmd, follow the instructions prompted. 
+
+* Bundle name [KendoctorCmsBundle]: - Enter go on
+* Target directory - Go on
+* Do you want to generate the whole directory structure ? - as you like
+* Format "yml" - Yes
+* Confirm automatic update of your Kernel ? - yes. This will append your bundle in Kernel loading. It's necessary to let bundle work. Also you can manually do it. Check app/AppKernel.php to see what was happened.
+* Confirm automatic update of the routing ? - yes. What's the routing. Just a minute.
+
+Finally we got a KendoctorCmsBundle.
 
 
 

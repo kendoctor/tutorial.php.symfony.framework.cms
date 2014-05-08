@@ -1,0 +1,3 @@
+kendoctor_cms_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: KendoctorCmsBundle:Default:index }

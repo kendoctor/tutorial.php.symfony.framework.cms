@@ -1,0 +1,7 @@
+parameters:
+#    kendoctor_cms.example.class: Kendoctor\CmsBundle\Example
+
+services:
+#    kendoctor_cms.example:
+#        class: %kendoctor_cms.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
