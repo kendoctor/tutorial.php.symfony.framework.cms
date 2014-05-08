@@ -18,6 +18,8 @@ So let us have a brief idea about symfony project structure.
 
 ##Symfony project structure
 
+If your memory can not contain so much information below, you can skip this section. I will guide you in the project development step by step.
+
 In the root directory of the project. there are several files.
 
 * composer.json - it's for composer to manage dependencies.
@@ -47,6 +49,35 @@ Let us briefly check app folder
 * check.php - check whether your current php env are fully fit for symfony framework or not.
 * logs - yes. logs something for your diagnosis. nees write permission for web server.
 * SymfonyRequirements.php - You should not change it. but, you can view it.
+
+Ok. Let us pay attension to src folder a little bit.
+
+This folder default only contains one folder by the name Acme. 
+
+What does it means?
+
+It means a name for one Vendor. For example, Kendoctor, Microsoft, Sony etc.
+
+Enter into Acme you will see DemoBundle which means a Bundle provided by vendor Acme.
+
+Enter DemoBundle, you will see commonly used bundle structure, such as
+
+* Controller - It's "C" here. 
+* Entity - It's "M" here.
+* Form - Form classes for creating forms
+* Resources - "V" in this folder, aslo contains bundle-level resources here.
+* Tests - Do you know?
+* Others - It's not important to describe everthing here now.
+
+Folder "Vendor" as the name is, 3-party php libraies and bundles located in this directory. You can check by yourself. Not necessary to know here.
+
+OK. It's time to let us make our hands to move.
+
+##Generate a bundle and create a page now
+
+
+
+
 
 
 
