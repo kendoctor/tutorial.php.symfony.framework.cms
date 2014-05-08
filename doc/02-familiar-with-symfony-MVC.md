@@ -33,8 +33,20 @@ There are several folders in the root.
 * bin - some thirty-party binary could be put into this folder
 * vendor - contains thirty-party php libraires and bundles.
 
+Let us briefly check app folder
 
-
+* AppCache.php - it's for cache usage. Default is not used.
+* bootstrap.php.cache - for symfony application bootstrap.
+* config [folder] - as the name is, contains various configs.
+* phpunit.xml.dist - have you any idea about phpunit testing?
+* AppKernel.php - Kernel of app, as the name states, it's important. As app begins to run, kernel will load bundles here.
+* cache [folder] - the name you can see right? needs write permission for web server.
+* console - executes symfony CLI cmds.
+* Resources - yeah, app level resources for symfony app.
+* autoload.php - including this file to autload namespaces and classes 
+* check.php - check whether your current php env are fully fit for symfony framework or not.
+* logs - yes. logs something for your diagnosis. nees write permission for web server.
+* SymfonyRequirements.php - You should not change it. but, you can view it.
 
 
 
