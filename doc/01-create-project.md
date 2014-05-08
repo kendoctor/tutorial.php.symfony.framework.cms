@@ -1,28 +1,36 @@
-#Explore symfony framework (version ~2.4.*) via a Simple CMS project
+#Create Symfony Framework Project
 
 ##First of all, we need setup a symfony framework project
 
-	As you have already  setup a php development environment(apache+php+mysql).
+As you have already  setup a php development environment(apache+php+mysql).
 	
-	Then we will go on.
+Then we will go on.
 
-	Here, we will use composer to create this project, so you need download a composer.
-	NOTE: You should stay in a directory which you have write permission.
-	
-	$ curl -sS https://getcomposer.org/installer | php
+Here, we will use composer to create this project, so you need download a composer.
 
-	If you want this composer work in global, move it
-	
-	$ sudo mv composer.phar /usr/bin/composer
+**NOTE**: You should stay in a directory which you have a write permission.
 
-	Then you can issue composer everywhere.
+```	
+$ curl -sS https://getcomposer.org/installer | php
+```
 
-	OK. Go on.
+If you want this composer work in global, move it
 
-	$ composer create-project symfony/framework-standard-edition symfony-cms 2.4.*
+```
+$ sudo mv composer.phar /usr/bin/composer
+```
 
-	Waiting for download to be completed.
-	When in the end, this framework version will prompt you to enter some basic configurations. I think you can do that.
+Then you can issue composer everywhere.
+
+OK. Go on.
+
+```
+$ composer create-project symfony/framework-standard-edition symfony-cms 2.4.*
+```
+
+Waiting for download to be completed.
+
+...When in the end, this framework version will prompt you to enter some basic configurations. I think you can do that.
 	
 	*database configuration
 	*mail configuration

@@ -24,10 +24,10 @@
 	Waiting for download to be completed.
 	When in the end, this framework version will prompt you to enter some basic configurations. I think you can do that.
 	
-	*database configuration
-	*mail configuration
-	*locale
-	*cookie secret
+	* database configuration
+	* mail configuration
+	* locale
+	* cookie secret
 	
 
 	Next. we need clear cache and grant write permissions of  two directories : cache and logs to apache user and your current account.
