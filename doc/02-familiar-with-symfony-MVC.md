@@ -101,6 +101,30 @@ Issue this cmd, follow the instructions prompted.
 
 Finally we got a KendoctorCmsBundle.
 
+```
+Kendoctor
+└── CmsBundle
+    ├── Controller
+    │   └── DefaultController.php
+    ├── DependencyInjection
+    │   ├── Configuration.php
+    │   └── KendoctorCmsExtension.php
+    ├── KendoctorCmsBundle.php
+    ├── Resources
+    │   ├── config
+    │   │   ├── routing.yml
+    │   │   └── services.yml
+    │   └── views
+    │       └── Default
+    │           └── index.html.twig
+    └── Tests
+        └── Controller
+            └── DefaultControllerTest.php
+```
+
+
+
+
 
 
 
