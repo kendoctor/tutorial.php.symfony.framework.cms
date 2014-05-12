@@ -122,6 +122,49 @@ Kendoctor
             └── DefaultControllerTest.php
 ```
 
+When this bundle was generated, we already have created a new page.
+How can we access ?
+
+symfony-cms.com/app_dev.php/hello/world
+
+The last part *world* is a parameter, you can change what you want.
+*app_dev.php* is the application entry in development environment.
+In development environment normally we have no cache feature, but we can get the immediate result without clearing cache when we have modifed something.
+
+If the url matches app_dev.php/hello/{parameter}, the page will display "Hello ....".
+Why? Open routing.yml in Kendoctor/CmsBundle/Resources/config.
+
+```
+kendoctor_cms_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: KendoctorCmsBundle:Default:index }
+```
+
+This is a router which maps a url to a controller to run.
+**NOTE**: .yml files are yaml format, indentation should use spaces, not tabs.
+We can find a controller class in Kendoctor/CmsBundle/Controller folder.
+
+```
+<?php
+
+namespace Kendoctor\CmsBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+
+class DefaultController extends Controller
+{
+    public function indexAction($name)
+    {
+        return $this->render('KendoctorCmsBundle:Default:index.html.twig', array('name' => $name));
+    }
+}
+```
+
+
+
+
+
+
 
 
 
