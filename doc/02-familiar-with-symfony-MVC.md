@@ -125,7 +125,9 @@ Kendoctor
 When this bundle was generated, we already have created a new page.
 How can we access ?
 
+```
 symfony-cms.com/app_dev.php/hello/world
+```
 
 The last part *world* is a parameter, you can change what you want.
 *app_dev.php* is the application entry in development environment.
@@ -141,7 +143,12 @@ kendoctor_cms_homepage:
 ```
 
 This is a router which maps a url to a controller to run.
+
+* pattern - the url format, here {name} means a parameter which you can get in action
+* _controller - which bundle, which controller and which action will be directed to.
+
 **NOTE**: .yml files are yaml format, indentation should use spaces, not tabs.
+
 We can find a controller class in Kendoctor/CmsBundle/Controller folder.
 
 ```
@@ -159,6 +166,40 @@ class DefaultController extends Controller
     }
 }
 ```
+
+Here, you should notice the name convention of _controller in router.
+
+* KendoctorCmsBundle - bundle name
+* Default - means a controller named DefaultController
+* index - a method named indexAction in controller class
+
+DefaultController derived from Symfony\Bundle\FrameworkBundle\Controller\Controller has a method *render* which return as *Response* object. This method renders a template with passed variables. Then where is the template? It's in *Resources* folder of the bundle.
+
+* KendoctorCmsBundle - bundle name
+* Default - a folder named *Default* in *Resources* folder
+* index.html.twig - normally uses this name convention, {action}.{foramt}.{templating-engine}, for another example, show.xml.php
+
+**NOTE**: here, twig is a symfony default templating engine, also you can others. But, we will use it all along, I think it's so perfect engine.
+
+Open file index.html.twig , you will see below
+
+```
+Hello {{ name }}!
+```
+
+It's so simple. This is a twig format file. *name* is passed via the second argument of *render* method, in template you can accept it via the array assoc key.
+
+Up to now, I think you can create your page following what you have already understood. Try it.
+
+##Conclusion
+
+We have explained symfony's MVC. How does symfony convert a request to a response? 
+
+1. Url matches a router
+2. The router directs the execution to a action of a controller.
+3. The action does some logics ,calculations and return a response.
+4. How to return a response? renders a template with variables passed in.
+
 
 
 
