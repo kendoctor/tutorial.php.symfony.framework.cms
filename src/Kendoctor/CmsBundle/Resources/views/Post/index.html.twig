@@ -1,0 +1,26 @@
+{% for message in app.session.flashbag.get('notice') %}
+    <div class="alert">{{ message }}</div>
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td><a href="{{ path('cms_post_show', {id: post.id}) }}" title="{{ post.title }}">{{ post.id }}</a></td>
+            <td>{{ post.title }}</td>
+            <td><a href="{{ path('cms_post_update', {id: post.id} ) }}">Edit</a>
+                <a href="{{ path('cms_post_show', {id: post.id}) }}" title="{{ post.title }}">Show</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    <a href="{{ path('cms_post_create') }}">New a post</a>
+</div>

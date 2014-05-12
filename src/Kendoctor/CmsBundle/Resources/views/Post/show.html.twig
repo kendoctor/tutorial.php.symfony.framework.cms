@@ -1,0 +1,7 @@
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+
+<div>
+    <a href="{{ path('cms_post_index') }}">Return to list</a>
+    {{ form(form_delete) }}
+</div>

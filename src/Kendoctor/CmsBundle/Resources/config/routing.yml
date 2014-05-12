@@ -1,3 +1,23 @@
 kendoctor_cms_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: KendoctorCmsBundle:Default:index }
+
+cms_post_index:
+    pattern:  /post
+    defaults: { _controller: KendoctorCmsBundle:Post:index }
+
+cms_post_show:
+    pattern:  /post/{id}/show
+    defaults: { _controller: KendoctorCmsBundle:Post:show }
+
+cms_post_create:
+    pattern:  /post/create
+    defaults: { _controller: KendoctorCmsBundle:Post:create }
+
+cms_post_update:
+    pattern:  /post/{id}/update
+    defaults: { _controller: KendoctorCmsBundle:Post:update }
+
+cms_post_delete:
+    pattern:  /post/{id}/delete
+    defaults: { _controller: KendoctorCmsBundle:Post:delete }
