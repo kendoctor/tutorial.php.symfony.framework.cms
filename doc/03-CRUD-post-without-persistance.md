@@ -118,7 +118,7 @@ class Post {
 * body - holds detailed information of a post
 * setters and getters - because member variables are private, we need them.
 
-##Create controller and actions
+##Create controller, actions and templates
 
 First, let us implement list posts feature.
 
@@ -216,3 +216,72 @@ Up to now , we know about twig templating little. Take it easy, we will learn mo
 useful to display error messages in next request.
 * path - is a twig function which generates url by giving a router name. If router has parameters, push values in the second argument.
 * { key : value } - this is a twig object expression, the same as javascript object expression.
+
+After you finished these codes, you can try *symfony-cms.com/post*
+
+Next, let us learn how to display a post by its id.
+
+Append codes in the PostController as following
+
+```
+...
+
+/**
+     * Show a post by id
+     *
+     * @param $id integer
+     */
+    public function showAction($id)
+    {
+        if(!isset($this->posts[$id]))
+        {
+            throw $this->createNotFoundException(sprintf("No post found for %s", $id));
+        }
+
+        return $this->render('KendoctorCmsBundle:Post:show.html.twig',array(
+            'post'=>$this->posts[$id],
+            'form_delete' => $this->createDeleteForm($id)->createView()
+        ));
+    }
+
+    /**
+     * create a form for delete post
+     *
+     * @param $id
+     * @return \Symfony\Component\Form\Form
+     */
+    public function createDeleteForm($id)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('cms_post_delete', array('id'=>$id)))
+            ->setMethod('DELETE')
+            ->add('submit', 'submit', array('label'=>'Delete'))
+            ->getForm();
+    }
+...
+```
+
+* createNotFoundException -  creates a Response which has a 404 status code.
+* createFormBuilder - creates a FormBuilder which can add field via its add method
+* setAction - It's a FormBuilder's method which sets <form action="?" ...>.
+* setMethod - It's a FormBuilder's method which sets <form method="?" ...>, but for DELETE or PUT type,
+form method is still 'POST' while inserting a hidden field named '_method' with value 'DELETE' in the form.
+You can check the source code to see what's the fact.
+* generateUrl - generates url by giving a router, the same usage with path() which is only used in template.
+* getForm - It's a FormBuilder's method which returns a Form type object.
+* createView - It's a Form's method which creates a view to be rendered in template.
+
+In template *show.html.twig* :
+
+```
+<h1>{{ post.title }}</h1>
+<p>{{ post.body }}</p>
+
+<div>
+    <a href="{{ path('cms_post_index') }}">Return to list</a>
+    {{ form(form_delete) }}
+</div>
+```
+
+Here , form() is a twig function which output a FormView object.
+
