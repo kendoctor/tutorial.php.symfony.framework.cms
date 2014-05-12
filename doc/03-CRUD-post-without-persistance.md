@@ -113,6 +113,11 @@ class Post {
 }
 ```
 
+* id - treated as primary key, should be unique.
+* title - holds title of a post
+* body - holds detailed information of a post
+* setters and getters - because member variables are private, we need them.
+
 ##Create controller and actions
 
 First, let us implement list posts feature.
@@ -121,6 +126,7 @@ Create *PostController* in Controller folder of the bundle.
 
 ```
 <?php
+namespace Kendoctor\CmsBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Kendoctor\CmsBundle\Entity\Post;
@@ -163,3 +169,50 @@ class PostController extends  Controller{
 
     ....
 ```
+
+Here, we create memory Post objects in constructor, then all actions in this controller can access these posts.
+
+In *indexAction*, there is only one line code which renders a template with all posts. So, we need create a template
+named *index.html.twig' in Resources/views/Post folder of KendoctorCmsBundle.
+
+```
+{% for message in app.session.flashbag.get('notice') %}
+    <div class="alert">{{ message }}</div>
+{% endfor %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for post in posts %}
+        <tr>
+            <td><a href="{{ path('cms_post_show', {id: post.id}) }}" title="{{ post.title }}">{{ post.id }}</a></td>
+            <td>{{ post.title }}</td>
+            <td><a href="{{ path('cms_post_update', {id: post.id} ) }}">Edit</a>
+                <a href="{{ path('cms_post_show', {id: post.id}) }}" title="{{ post.title }}">Show</a></td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>
+    <a href="{{ path('cms_post_create') }}">New a post</a>
+</div>
+```
+
+Up to now , we know about twig templating little. Take it easy, we will learn more and more syntax about twig in the procedure.
+
+* {{ }} - outputs a variable or expression or return value of function
+* {% %} - contains logics, statements, such looping, assignment etc.
+* {{ post.id }} - post is an object, so you can access its id via post.id
+* for item in collection_or_array -  looping for iterating items in collection or array
+* app - app level variables
+* app.session - accesses session of the app
+* app.session.flashbag - flash bag is a special key-array data, which can get only once and cleared after get. It's very
+useful to display error messages in next request.
+* path - is a twig function which generates url by giving a router name. If router has parameters, push values in the second argument.
+* { key : value } - this is a twig object expression, the same as javascript object expression.
