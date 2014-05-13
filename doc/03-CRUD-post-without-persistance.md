@@ -342,6 +342,67 @@ app.session.flashbag. *add* is a method of flashbag object which adds a key-valu
 * handleRequest - gets data from request and binds the data with the form, while applying the fields constraints.
 * isValid - verify whether the form data is valid or not.
 
+When form data is valid, we redirect to post list page and display notice in flashbag. Otherwise, we will re-render new form.
+
+In *new.html.twig*, codes is simple
+
+```
+{{ form(form) }}
+```
+
+Finally, we will introduce how to update a post by its id, it's almost the same as creating a post
+
+```
+/**
+     * update post by id
+     *
+     * @param $id
+     */
+    public function updateAction($id, Request $request)
+    {
+        if(!isset($this->posts[$id]))
+        {
+            throw $this->createNotFoundException(sprintf("No post found for %s", $id));
+        }
+
+        $post = $this->posts[$id];
+        $form = $this->createFormBuilder($post)
+            ->setAction($this->generateUrl('cms_post_update', array('id'=>$id)))
+            ->setMethod('PUT')
+            ->add('title', 'text', array('constraints' => array(
+                new NotBlank(),
+                new Length(array('min'=>2,'max'=>255))
+            )))
+            ->add('body', 'textarea')
+            ->add('save', 'submit')
+            ->getForm();
+
+        if($request->getMethod() == 'PUT')
+        {
+            $form->handleRequest($request);
+            if($form->isValid()) {
+
+                $this->get('session')->getFlashBag()->add('notice', 'You have successfully update the post.');
+
+                return $this->redirect($this->generateUrl('cms_post_index'));
+            }
+        }
+        return $this->render('KendoctorCmsBundle:Post:edit.html.twig',array(
+            'form' => $form->createView(),
+            'post' => $post
+        ));
+    }
+```
+
+Only little ,we need take care. *setMethod* sets 'PUT' method, *getMethod* also needs comparing to 'PUT'.
 
 
+##Conclusion
+
+In this chapter, we introduces lof of classes, methods, usages. You should try to memorize more and do more exercises.
+CRUD is a very common task, you should complete it without doubt while not wasting much time.
+
+1. define routers for all actions
+2. create controller, actions and fill logics
+3. create templates in the last
 
