@@ -261,7 +261,7 @@ Append codes in the PostController as following
 ...
 ```
 
-* createNotFoundException -  creates a Response which has a 404 status code.
+* createNotFoundException -  creates a Response which has a 404 status code by throwing a exception.
 * createFormBuilder - creates a FormBuilder which can add field via its add method
 * setAction - It's a FormBuilder's method which sets <form action="?" ...>.
 * setMethod - It's a FormBuilder's method which sets <form method="?" ...>, but for DELETE or PUT type,
@@ -269,7 +269,7 @@ form method is still 'POST' while inserting a hidden field named '_method' with 
 You can check the source code to see what's the fact.
 * generateUrl - generates url by giving a router, the same usage with path() which is only used in template.
 * getForm - It's a FormBuilder's method which returns a Form type object.
-* createView - It's a Form's method which creates a view to be rendered in template.
+* createView - It's a Form's method which creates a FormView object to be rendered in template.
 
 In template *show.html.twig* :
 
@@ -284,4 +284,64 @@ In template *show.html.twig* :
 ```
 
 Here , form() is a twig function which output a FormView object.
+
+Next, let us learn how to create a new post, continuing our codes
+
+```
+    ....
+ /**
+     *  create a new post
+     */
+    public function createAction(Request $request)
+    {
+        $post = new Post();
+        $form = $this->createFormBuilder($post)
+            ->setAction($this->generateUrl('cms_post_create'))
+            ->add('title', 'text', array('constraints' => array(
+                new NotBlank(),
+                new Length(array('min'=>2,'max'=>255))
+            )))
+            ->add('body', 'textarea')
+            ->add('save', 'submit')
+            ->getForm();
+
+        if($request->getMethod() == 'POST')
+        {
+            $form->handleRequest($request);
+            if($form->isValid()) {
+                $this->get('session')->getFlashBag()->add('notice', 'You have successfully create a post.');
+
+                return $this->redirect($this->generateUrl('cms_post_index'));
+            }
+        }
+        return $this->render('KendoctorCmsBundle:Post:new.html.twig',array(
+            'form' => $form->createView(),
+            'post' => $post
+        ));
+   }
+   ....
+```
+
+* Symfony\Component\HttpFoundation\Request - if you want to access Request object in controller, you can make it as
+an argument of action, alos you can use getRequest() method of controller.
+* FormBuilder - createFormBuilder, here, takes a $post data object. The data will be used as form field default value.
+* add - is method FormBuilder object.
+    ** title - the name should be accessed from data object via getter and setter or public member variable
+    ** text - is a kind of form type, here, it will render this field as <input type="text" ..../>
+    ** array(...) - the third argument is an array which can hold lots of options, here, *constraints* means binding
+validation contraints with this field, when $form's handleRequest is called, these constraints will check whether this
+field value is valid or not. if not, $form->isValid will be false.
+        *** NotBlank - is a contraint for not allowing blank field
+        *** Length - is a contraint for limiting the length of text content in the field
+* textarea - renders a field as <textarea>...</textarea>
+* getMethod - determines which type of method the request is.
+* get('session') - session is service name, about symfony DI service we will discuss it later, here, you should know
+get('servicename') returns a service. getFlashBag is a method of session object, which is mentioned before in template :
+app.session.flashbag. *add* is a method of flashbag object which adds a key-value into flashbag's key-array.
+* redirect - return a Symfony\Component\HttpFoundation\RedirectResponse object which will redirect the page with the first argument.
+* handleRequest - gets data from request and binds the data with the form, while applying the fields constraints.
+* isValid - verify whether the form data is valid or not.
+
+
+
 
