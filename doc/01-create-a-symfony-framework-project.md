@@ -1,4 +1,4 @@
-#Create Symfony Framework Project
+#Create a Symfony Framework project
 
 ##First of all, we need setup a symfony framework project
 
