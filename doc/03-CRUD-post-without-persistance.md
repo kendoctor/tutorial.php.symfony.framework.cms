@@ -326,13 +326,13 @@ Next, let us learn how to create a new post, continuing our codes
 an argument of action, alos you can use getRequest() method of controller.
 * FormBuilder - createFormBuilder, here, takes a $post data object. The data will be used as form field default value.
 * add - is method FormBuilder object.
-    ** title - the name should be accessed from data object via getter and setter or public member variable
-    ** text - is a kind of form type, here, it will render this field as <input type="text" ..../>
-    ** array(...) - the third argument is an array which can hold lots of options, here, *constraints* means binding
+    * title - the name should be accessed from data object via getter and setter or public member variable
+    * text - is a kind of form type, here, it will render this field as <input type="text" ..../>
+    * array(...) - the third argument is an array which can hold lots of options, here, *constraints* means binding
 validation contraints with this field, when $form's handleRequest is called, these constraints will check whether this
 field value is valid or not. if not, $form->isValid will be false.
-        *** NotBlank - is a contraint for not allowing blank field
-        *** Length - is a contraint for limiting the length of text content in the field
+        * NotBlank - is a contraint for not allowing blank field
+        * Length - is a contraint for limiting the length of text content in the field
 * textarea - renders a field as <textarea>...</textarea>
 * getMethod - determines which type of method the request is.
 * get('session') - session is service name, about symfony DI service we will discuss it later, here, you should know
